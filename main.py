@@ -34,11 +34,6 @@ print("")
 def main(server=SERVER):
 
   print("mac address", mac)
-  except (KeyboardInterrupt):
-    print('\n', "Exit on Ctrl-C: Good bye!")
-
-  finally:
-    print('\n', "Disconnecting.")
  
 if __name__ == "__main__":
     main()
