@@ -18,5 +18,7 @@ menuconfig → MicroPython → File systems → Use SPIFFS
 
 #### Make the file system
 	./BUILD.sh makefs
+#### Serial port permissions
+https://askubuntu.com/questions/112568/how-do-i-allow-a-non-default-user-to-use-serial-device-ttyusb0
 
 
