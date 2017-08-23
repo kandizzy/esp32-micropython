@@ -4,8 +4,9 @@ import ubinascii
 from pye import pye
 
 # gpio==
-from machine import Pin# ws2812
-np = neopixel.NeoPixel(Pin(16), 3, timing=1)
+from machine import Pin, ADC #ws2812, piezo
+np = neopixel.NeoPixel(Pin(16), 4, timing=1)
+adc = ADC(Pin(34))
 
 print("")
 print("Starting WiFi ...")
@@ -30,10 +31,56 @@ t = rtc.now()
 print(str(t[3])+':'+str(t[4])+':'+str(t[5])+' '+str(t[2])+'/'+str(t[1])+'/'+str(t[0]))
 print("")
 
+def red():
+  print("red")
+  n = np.n
+  for i in range(n):
+    np[i] = (255, 0, 0)
+  np.write()
+
+def green():
+  print("green")
+  n = np.n
+  for i in range(n):
+    np[i] = (0, 255, 0)
+  np.write()
+
+def blue():
+  print("blue")
+  n = np.n
+  for i in range(n):
+    np[i] = (0, 0, 255)
+  np.write()
+
+def off():
+  n = np.n
+  for i in range(n):
+    np[i] = (0, 0, 0)
+  np.write()
+
+threshold = 100
+color = (255,0,0)
+
+def blink(color):
+    for i in range(np.n):
+        np[i] = color
+    np.write()
+    time.sleep(.01)
+    for i in range(np.n):
+        np[i] = (0, 0, 0)
+    np.write()
+
+def listen():
+    #print(adc.read())
+    if adc.read() < threshold:
+      blink(color)
 
 def main():
-
+  off()
   print("mac address", mac)
+  while True:
+    listen()
+  
  
 if __name__ == "__main__":
     main()

@@ -32,21 +32,21 @@ print("")
 
 
 def red():
-  print("heartbeatOnly")
+  print("red")
   n = np.n
   for i in range(n):
     np[i] = (255, 0, 0)
   np.write()
 
 def green():
-  print("weatherOnly")
+  print("green")
   n = np.n
   for i in range(n):
     np[i] = (0, 255, 0)
   np.write()
 
 def blue():
-  print("heartbeatWeather")
+  print("blue")
   n = np.n
   for i in range(n):
     np[i] = (0, 0, 255)
