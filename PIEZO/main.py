@@ -10,7 +10,7 @@ np = neopixel.NeoPixel(Pin(16), 3, timing=1)
 print("")
 print("Starting WiFi ...")
 sta_if = network.WLAN(network.STA_IF); sta_if.active(True)
-sta_if.connect("{SSID}", "{PASSWORD}")
+sta_if.connect("workshops", "floating")
 while not sta_if.isconnected():
     utime.sleep_ms(100)
 
