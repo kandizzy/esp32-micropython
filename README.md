@@ -1,22 +1,32 @@
 # esp32-micropython
 
-After cloning the foloowing repo which provides MicroPython for ESP32, with 4MB psRAM support and esp-idf building system, we can build and flash the firmware to the board.
+A development environment is setup in your Linux environment. 
 [https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo](https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo)
+MicroPython for ESP32, with 4MB psRAM support and esp-idf building system.
+
+Now we can build apps and flash the board with our new file systems.
 
 
-#### Enable SPIFFS
+#### Check folder location
 
 	cd ~/MicroPython_ESP32_psRAM_LoBo/MicroPython_BUILD
-	sudo apt-get install libncurses-dev ncurses-dev flex bison gperf
-	./BUILD.sh menuconfig
-	
-menuconfig → MicroPython → File systems → Use SPIFFS
 
-#### Build the Micropython firmware and flash it to the board
-	./BUILD.sh -j4
-	./BUILD.sh flash
+#### Flash the file system
 
-#### Make the file system
-	./BUILD.sh makefs
+	./BUILD.sh flashfs
+
+#### Monitor
+	./BUILD.sh monitor
 
 
+#### LEDs
+
+link to code
+
+#### PIEZO
+
+link to code
+
+#### PPG
+
+link to code
