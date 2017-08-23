@@ -5,7 +5,7 @@ from pye import pye
 
 # gpio==
 from machine import Pin# ws2812
-np = neopixel.NeoPixel(Pin(16), 3, timing=1)
+np = neopixel.NeoPixel(Pin(16), 4, timing=1)
 
 print("")
 print("Starting WiFi ...")
@@ -31,14 +31,31 @@ print(str(t[3])+':'+str(t[4])+':'+str(t[5])+' '+str(t[2])+'/'+str(t[1])+'/'+str(
 print("")
 
 
-def main(server=SERVER):
+def red():
+  print("heartbeatOnly")
+  n = np.n
+  for i in range(n):
+    np[i] = (255, 0, 0)
+  np.write()
+
+def green():
+  print("weatherOnly")
+  n = np.n
+  for i in range(n):
+    np[i] = (0, 255, 0)
+  np.write()
+
+def blue():
+  print("heartbeatWeather")
+  n = np.n
+  for i in range(n):
+    np[i] = (0, 0, 255)
+  np.write()
+
+def main():
 
   print("mac address", mac)
-  except (KeyboardInterrupt):
-    print('\n', "Exit on Ctrl-C: Good bye!")
-
-  finally:
-    print('\n', "Disconnecting.")
+  
  
 if __name__ == "__main__":
     main()

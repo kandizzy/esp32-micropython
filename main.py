@@ -1,11 +1,7 @@
 # This file is executed on every boot (including wake-boot from deepsleep)
-import machine, network, utime, neopixel, time
+import machine, network, utime, time
 import ubinascii
 from pye import pye
-
-# gpio==
-from machine import Pin# ws2812
-np = neopixel.NeoPixel(Pin(16), 3, timing=1)
 
 print("")
 print("Starting WiFi ...")
@@ -31,7 +27,7 @@ print(str(t[3])+':'+str(t[4])+':'+str(t[5])+' '+str(t[2])+'/'+str(t[1])+'/'+str(
 print("")
 
 
-def main(server=SERVER):
+def main():
 
   print("mac address", mac)
  
