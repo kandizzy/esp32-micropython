@@ -76,11 +76,18 @@ def listen():
       blink(color)
 
 def main():
-  off()
   print("mac address", mac)
-  while True:
-    listen()
-  
- 
+  off()
+
+  try:
+    while True:
+      listen()
+
+  except (KeyboardInterrupt):
+    print('\n', "Exit on Ctrl-C: Good bye!")
+
+  finally:
+    print('\n', "Disconnecting.")
+   
 if __name__ == "__main__":
     main()
