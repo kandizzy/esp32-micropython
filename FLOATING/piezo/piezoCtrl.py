@@ -23,6 +23,8 @@ class PIEZOCtrl(object):
 
     def validateKnock(self):
         print("validateKnock", self.knockReadings)
+        if (len(self.knockReadings) < 1):
+            return False
         i = 0
         currentKnockCount = 0
         secretKnockCount = 0
@@ -71,7 +73,7 @@ class PIEZOCtrl(object):
         if (self.programming == True):
             self.LedCtrl.blink( (255, 0 ,0) )
         time.sleep_ms(self.knockFadeTime)
-      
+              
         #listen for the next knock or wait for it to timeout.
         while ((now <= self.knockComplete) and (currentKnockNumber < len(self.secretCode))):
             self.knockSensorValue = adc.read()

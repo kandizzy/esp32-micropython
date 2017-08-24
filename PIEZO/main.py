@@ -65,7 +65,7 @@ def blink(color):
     for i in range(np.n):
         np[i] = color
     np.write()
-    time.sleep(.01)
+    time.sleep_ms(500)
     for i in range(np.n):
         np[i] = (0, 0, 0)
     np.write()
@@ -73,8 +73,9 @@ def blink(color):
 def listen():
     #print(adc.read())
     if adc.read() < threshold:
+      time.sleep_ms(150)
       blink(color)
-      time.sleep_ms(25)
+      
 
 
 def main():
