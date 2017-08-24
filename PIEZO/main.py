@@ -74,6 +74,8 @@ def listen():
     #print(adc.read())
     if adc.read() < threshold:
       blink(color)
+      time.sleep_ms(25)
+
 
 def main():
   print("mac address", mac)

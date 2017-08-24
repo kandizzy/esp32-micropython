@@ -94,44 +94,51 @@ def main():
   MAX30105.setPulseAmplitudeRed(0x0A)
   MAX30105.setPulseAmplitudeGreen(0x00)
 
+  HearRateSensor = HeartBeat()
+
+  rates = [0] * 4
+  rateSize = len(rates)
+  rateSpot = 0
+  lastBeat = 0
+
   try:
     while True:
       listen()
 
       lastBeat = time.ticks_ms()
-        for FIFO_pointer in range(32):
-            #try:
-            sensor_data = MAX30105.read_sensor_multiLED(FIFO_pointer)
-            #print("sensor_data", sensor_data)
-            irValue = int(sensor_data[1])
+      for FIFO_pointer in range(32):
+          #try:
+          sensor_data = MAX30105.read_sensor_multiLED(FIFO_pointer)
+          #print("sensor_data", sensor_data)
+          irValue = int(sensor_data[1])
 
-            # red led will be greater than 50000 if your finger is on the sensor
-            if (sensor_data[0] < 50000):
-                rates = [0] * 4
-                rateSpot = 0
+          # red led will be greater than 50000 if your finger is on the sensor
+          if (sensor_data[0] < 50000):
+              rates = [0] * 4
+              rateSpot = 0
+              lastBeat = time.ticks_ms()
+          else:
+            # print("hr ir:", irValue, "red:", sensor_data[0])
+            if (HearRateSensor.checkForBeat(irValue)):
+                print("beat")
+                delta = time.ticks_diff(time.ticks_ms(), lastBeat)
                 lastBeat = time.ticks_ms()
-            else:
-              # print("hr ir:", irValue, "red:", sensor_data[0])
-              if (HearRateSensor.checkForBeat(irValue)):
-                  print("beat")
-                  delta = time.ticks_diff(time.ticks_ms(), lastBeat)
-                  lastBeat = time.ticks_ms()
-                  beatsPerMinute = 60 / (delta/1000)
+                beatsPerMinute = 60 / (delta/1000)
 
-                  if (beatsPerMinute < 255 and beatsPerMinute > 20):
-                      
-                      if (rateSpot > 3):
-                        rateSpot = 0
+                if (beatsPerMinute < 255 and beatsPerMinute > 20):
+                    
+                    if (rateSpot > 3):
+                      rateSpot = 0
 
-                      rates[rateSpot] = beatsPerMinute
-                      rateSpot += 1
-                      print("rates", rates)
+                    rates[rateSpot] = beatsPerMinute
+                    rateSpot += 1
+                    print("rates", rates)
 
-                      beatAvg = 0
-                      for x in range(rateSize):
-                          beatAvg += rates[x]
-                      beatAvg /= rateSize
-                      print (beatAvg)
+                    beatAvg = 0
+                    for x in range(rateSize):
+                        beatAvg += rates[x]
+                    beatAvg /= rateSize
+                    print (beatAvg)
 
 
   except (KeyboardInterrupt):
